@@ -1,7 +1,11 @@
+*.log
+*.fault
 *.DS_Store
 bin/*
 bin/**/*
 lib/*
 lib/**/*
+**/output/*
+**/output/**/*
 
 
