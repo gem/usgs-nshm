@@ -11,7 +11,7 @@
 1 0 1 6.5
 ./GR_DOS/fltmmaxALL24gr.out6
 ./GR_DOS/wtgrid.65plus
-./output/agrd_wusext.out
+./GR_DOS/agrd_wusext.out
 1. 0
 4   4 spectral periods
 0. 1. 0. PGA
