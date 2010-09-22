@@ -1,0 +1,18 @@
+These files are freely available and in the public domain.
+I downloaded them from http://earthquake.usgs.gov/hazards/products/conterminous/2008/software/.
+
+We are going to reprocess this data using OpenGEM, and then try and validate
+the output against http://earthquake.usgs.gov/hazards/products/conterminous/2008/data/.
+
+We have made efforts to process this suite using the instructions provided at
+http://earthquake.usgs.gov/hazards/products/conterminous/2008/software/documentation.php
+
+The underlying historical catalogs that were used to generate the source zones
+used in these models are online at http://earthquake.usgs.gov/hazards/products/conterminous/2008/catalogs/
+
+As always, feedback and discussion is appreciated.
+
+http://www.globalquakemodel.org
+
+(The use of this data as a test and traceability matrix within OpenGEM can be
+seen at https://spreadsheets.google.com/ccc?key=tIpArW5Jt61w1u_UIAOvT5w&hl=en#gid=0)

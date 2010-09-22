@@ -1,0 +1,72 @@
+# regional hazard, CEUS, with updates to atten models for 2007
+# Also update to NMSZ model, JUNE 1 2007. Updates to Mmax late May, 2007.
+# Update to charleston broad zone Sept 2007
+#!/bin/csh
+echo This script runs 2007 CEUS hazard with the clustered src of NMSZ
+echo for gldscv or gldpnw
+set path = ( /export/harmsen/Hazard $path )
+echo You can run specific subsets by making arg 1 charles narrow test or faults
+# map contrib separates into B & J in version 3
+if ($1 == charles ) goto charles
+if ($1 == narrow ) goto narrow
+if ($1 == faults ) goto faults
+if ($1 == NMSZ) goto NMSZ
+if ($1 == nmc ) goto nmc
+echo Gridded CEUS hazard with 4 Mmax branches for J and AB M-conversions.
+# On most computers each of these gridded haz runs takes several hrs, 3 to 4 hr on Solaris machines.
+echo First 8 runs are for gridded hazard, standard mag corr.
+hazgridXnga2  CEUS.2007.AB1.in  > ceus.b1.log &
+hazgridXnga2  CEUS.2007.AB2.in  > ceus.b2.log 
+hazgridXnga2  CEUS.2007.AB3.in  > ceus.b3.log &
+hazgridXnga2  CEUS.2007.AB4.in  > ceus.b4.log 
+hazgridXnga2  CEUS.2007.J1.in  > ceus.j1.log & 
+hazgridXnga2  CEUS.2007.J2.in  > ceus.j2.log 
+hazgridXnga2  CEUS.2007.J3.in  > ceus.j3.log &
+hazgridXnga2  CEUS.2007.J4.in  > ceus.j4.log 
+if ($1 == cy ) exit 0
+# mag cor = yes new terminology from Mueller nov 15
+nmc:
+echo Next 8 runs are for gridded hazard, no mag  corr.
+hazgridXnga2  CEUS.2007a.AB1.in > ceus.b1n.log &
+hazgridXnga2  CEUS.2007a.AB2.in  > ceus.b2n.log 
+hazgridXnga2  CEUS.2007a.AB3.in  > ceus.b3n.log &
+hazgridXnga2  CEUS.2007a.AB4.in  > ceus.b4n.log 
+hazgridXnga2  CEUS.2007a.J1.in  > ceus.j1n.log & 
+hazgridXnga2  CEUS.2007a.J2.in  > ceus.j2n.log 
+hazgridXnga2  CEUS.2007a.J3.in  > ceus.j3n.log &
+hazgridXnga2  CEUS.2007a.J4.in  > ceus.j4n.log 
+if ( $1 == grid ) exit 0
+echo completed ceus gridded hazard challenge, no mag cor
+if ( $1 == nmc ) exit 0
+charles:
+echo Next 8 runs are for Charleston South Carolina source zones
+echo Charleston broad extended further offshore Sept 2007
+hazgridXnga2  CEUSchar.broad.in > char.broad.log &
+hazgridXnga2  CEUScharA.broad.in> charA.broad.log
+hazgridXnga2  CEUScharB.broad.in>charB.broad.log &
+hazgridXnga2  CEUScharC.broad.in> charC.broad.log
+narrow:
+hazgridXnga2  CEUScharn.in> char.narrow.log
+hazgridXnga2  CEUScharnA.in> charnA.narrow.log &
+hazgridXnga2  CEUScharnB.in> charnB.narrow.log &
+hazgridXnga2  CEUScharnC.in> charnC.narrow.log
+if ($1 == charles ) exit 0
+echo Narrow zones concluding 2007 Charleston hazard runs
+if ($1 == narrow ) exit 0
+# fault runs. As of june 2007, using hazFXnga7c for psha analysis
+faults:
+hazFXnga7c  CEUScm.in  > ch_meers.log &
+NMSZ:
+echo Running modified 2002 unclustered NMSZ model with 5 virtual fault branches
+echo NMSZ is explicitly run with 500 and 1000 yr recur. intervals
+hazFXnga7c  NMSZnocl.500yr.5branch.in > NMSZ5c.2007.log
+hazFXnga7c  NMSZnocl.1000yr.5branch.in > NMSZ1m.2007.log
+echo Next run NMSZ cluster models, 500 750 and 1500 year cluster recurrence time
+hazFXnga7c newmad.500.cluster.in > c500.log &
+hazFXnga7c newmad.750.cluster.in > c750.log &
+hazFXnga7c newmad.1000.cluster.in > c1000.log &
+hazFXnga7c newmad.1500.cluster.in > c1500.log &
+exit 0
+cmdline_err:
+echo Not clear how you got here. Please investigate.
+exit 5

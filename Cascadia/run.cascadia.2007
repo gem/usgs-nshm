@@ -1,0 +1,79 @@
+#!/bin/csh
+# Please reset pgmdir and datadir to your specifications.
+# Input: one required argument and one optional argument
+echo Cascadia subduction hazard models 2007 2008 USGS PSHA
+echo This script was updated March 4 2008
+set pgmdir = /home/harmsen/bin
+set datadir = /home/harmsen/GRID/Cascadia
+echo 'Standard grid 0.10 d sampling & BC rock site condition. One attenuation model per run'
+echo Arg 1 is code for attenuation model a = Atkinson Boore x = geomatrix z = zhao et al.
+echo Other relations that may be used k = Kanno et al  g = Gregor et al.
+echo For this to be a working script, file names must exactly equal those below.
+echo Enter ALT as arg 2 if you want to try som alternate spectral periods.
+if ($1a == a)goto error
+if ($2 == 8387)  goto 8387
+if ($2 == ALT) goto ALT
+if ($2 == ALTM ) goto ALT
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.88$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.9$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.92$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.9$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.88$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.92$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.9$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.88$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.92$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.9$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.88$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.92$1.in
+echo Megathrust runs completed
+if ($2 == mega) exit 0
+8387:
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.8387$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.8387$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.8387$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.8387$1.in
+echo Cascadia floating M8 to M8.2 are given half the weight of larger floaters
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.8082$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.8082$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.8082$1.in
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.8082$1.in
+echo	Floating rupture runs completed.
+exit 0
+ALT:
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.88$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.9$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.92$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.9$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.88$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.92$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.9$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.88$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.92$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.9$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.88$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.92$1.ina
+echo Megathrust runs completed
+if ($2 == ALTM) exit 0
+8387:
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.8387$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.8387$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.8387$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.8387$1.ina
+echo Cascadia floating M8 to M8.2 are given half the weight of larger floaters
+$pgmdir/hazSUBXnga  $datadir/cascadia.bot.8082$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.mid.8082$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.top.8082$1.ina
+$pgmdir/hazSUBXnga  $datadir/cascadia.older2.8082$1.ina
+echo	Floating rupture runs with some alternate pds completed.
+exit 0
+error:
+echo Please enter attenuation code as arg 1. Codes are a g k x z
+echo Code a stands for Atkinson-Boore subduction attenuation
+echo Code g stands for Gregor et al. subduction attenuation
+echo Code k stands for Kanno et al
+echo Code x stands for Geomatrix interface model
+echo Code z stands for Zhao et al. interface model
+echo Use lower case letter when specifying attenuation model
+echo NSHMP Dec 2007 final model uses a, x, and z
+exit 5

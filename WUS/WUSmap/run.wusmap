@@ -1,0 +1,25 @@
+#!/bin/csh
+if $1a == a goto error
+echo WUS gridded seismicity, sans CA, underway, use NGA atten models
+echo Deep intraplate sources also will be run, with their atten models.
+echo Subdirectory for log files  $1
+echo This script was updated nov 14 2007
+echo running wusmap gridded models with NGA
+hazgridXnga3 ~harmsen/PacNW/WUSmapC.in  > $1/wusmapcp.log &
+hazgridXnga3 ~harmsen/PacNW/WUSmapG.in > $1/wusmapgp.log 
+if ($2 == cmp)exit 0
+hazgridXnga3 EXTmapC.in > $1/extmapc.log &
+hazgridXnga3 EXTmapG.in > $1/extmapg.log 
+hazgridXnga3 ~harmsen/PacNW/nopugetC.in > $1/nopugetc.log &
+echo running some PacNW and deep intraplate models
+hazgridXnga3 ~harmsen/PacNW/nopugetG.in > $1/nopugetg.log 
+hazgridXnga3 ~harmsen/PacNW/pacnwdeep.in > $1/pnw.deep.log&
+if ($2 == foo ) exit 0
+hazgridXnga3 ~harmsen/PacNW/pugetmapC.in > $1/pugetc.log&
+hazgridXnga3 ~harmsen/PacNW/pugetmapG.in > $1/pugetg.log
+hazgridXnga3 ~harmsen/PacNW/portdeep.in > $1/portland.deep.log
+
+exit 0
+error:
+echo please enter the SUBDirectory as arg 1
+exit 1

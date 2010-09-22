@@ -1,0 +1,31 @@
+The zip file Cascadia.2007.zip contains the input files and combine instructions for the USGS
+2007 Cascadia source hazard model.
+Date written March 4 2008. Written on gldpnw after runs of all models were
+successfully tried.
+
+The steps for running are summarized in the two cshell scripts: 
+(1) run.cascadia.2007
+(2) combine.Casc3.csh
+
+These scripts have been tested on SUN machines with Solaris. They will have to
+be modified for other operating systems and with other directory structure.
+However, all of the steps that need to be taken are contained in these two scripts.
+
+Three programs are called in these two scripts. These programs are
+(1) hazSUBXnga
+(2) hazallXL.v2
+(3) hazinterp.nga
+
+The source codes for these are all in Fortran 95. The codes require a small library of
+input/output routines called iosubs.o during the compile-link step. The iosubs
+object code is based on code written in C. Different versions of iosubs are available
+for various operating systems. We have set up these successfully on PCs with
+windows and gnu-fortran and PCs with Linux and both gnu-fortran and Intel fortran (ifort).
+However, most of our experience is on SUN computers with Solaris OS, and the cshell
+scripts are available only for the SUN systems. For other systems, these zipped scripts are
+for guidance only.
+
+Steve Harmsen
+USGS Golden CO
+303 273 8567
+harmsen@usgs.gov
