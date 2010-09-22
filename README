@@ -16,3 +16,9 @@ http://www.globalquakemodel.org
 
 (The use of this data as a test and traceability matrix within OpenGEM can be
 seen at https://spreadsheets.google.com/ccc?key=tIpArW5Jt61w1u_UIAOvT5w&hl=en#gid=0)
+
+
+FIXME(S):
+
+ * There are various (different) copies of the hazFXnga7c.f file in this tree.
+ * Running hazFXnga7c throws a bus error when launched without polygon file.
