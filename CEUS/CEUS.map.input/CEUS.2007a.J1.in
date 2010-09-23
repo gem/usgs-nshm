@@ -10,8 +10,8 @@
 0.95 5.0 7.0 0.1 3.0
 3 1 1
 gb.out
-/home/mueller/PSHA/US_48e/GRIDm/gm_j_6p6_7p1.out
-/home/mueller/PSHA/US_48e/GRDa_adapt/adapt_cn.out
+gm_j_6p6_7p1.out
+adapt_cn.out
 1. 0
 3
 0. 0. 0. PGA
