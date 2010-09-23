@@ -9,8 +9,8 @@
 -126.5 -100. 0.1
 0.8 5.0 7 0.1 3.	!bvalue 0.8 everywhere but creeping
 1 0 1 6.5
-./GR_DOS/fltmmaxALL24gr.out6
-./GR_DOS/wtgrid.65plus
+fltmmaxALL24gr.out6
+wtgrid.65plus
 ./output/agrd_impext.out
 1. 0
 3    periods. extensioanl southern CA and NW Mexico
