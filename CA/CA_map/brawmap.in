@@ -9,7 +9,7 @@
 -126.5 -100. 0.1
 0.8 5.0 6.5 0.1 3.	!CA bvalue 0.8 everywhere but creeping section of SAF
 2 0 0 0
-./output/agrd_brawly.out
+agrd_brawly.out
 1. 0
 157.	!Virtual fault strike angle
 3    periods. Similar brawmap mag distribution as in 2002

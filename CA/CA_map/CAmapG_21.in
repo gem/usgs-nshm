@@ -11,7 +11,7 @@
 1 0  1 6.5
 fltmmaxALL21gr.out6
 wtgrid.65plus
-./output/agrd_cstcal.out
+agrd_cstcal.out
 1. 0
 3    3 spectral periods.
 0. 1. 0. PGA with epistemic
